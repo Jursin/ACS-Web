@@ -1,31 +1,31 @@
 ---
+import PageLayout from '@/layouts/BaseLayout.astro'
 import { PFSearch } from 'astro-pure/components/pages'
 import { Button } from 'astro-pure/user'
-import PageLayout from '@/layouts/BaseLayout.astro'
 import { integ } from '@/site-config'
 
 const meta = {
-  description: 'Search relative posts of the whole blog',
-  title: 'Search'
+  description: '从整个网站搜索相关文章',
+  title: '搜索'
 }
 ---
 
 <PageLayout {meta}>
-  <Button title='Back' href='/blog' style='back' />
+  <Button title='返回' href='/' style='back' />
   <main class='mt-6 lg:mt-10'>
     <div id='content-header' class='animate'>
-      <h1 class='mb-6 text-3xl font-medium'>Search</h1>
+      <h1 class='mb-6 text-3xl font-medium'>搜索</h1>
     </div>
 
     <div id='content' class='animate'>
       {
         integ.pagefind ? (
           <>
-            <p>Enter a search term or phrase to search the blog.</p>
+            <p>输入搜索词或短语以搜索整个网站。</p>
             <PFSearch />
           </>
         ) : (
-          <p>Pagefind is disabled.</p>
+          <p>页面搜索已禁用</p>
         )
       }
     </div>

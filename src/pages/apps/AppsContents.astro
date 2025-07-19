@@ -1,0 +1,106 @@
+---
+import { type CollectionEntry } from 'astro:content'
+import { getBlogCollection } from 'astro-pure/server'
+import { cn } from 'astro-pure/utils'
+
+export const prerender = true
+export const partial = true
+
+const appsCollection = (await getBlogCollection('apps')) as CollectionEntry<'apps'>[]
+// Group apps by id first part (setup, integrations, advanced, etc.)
+const appsByCate = appsCollection.reduce((acc: { [key: string]: typeof appsCollection }, app) => {
+  const id = app.id.split('/')[0]
+  if (!acc[id]) acc[id] = [] as typeof appsCollection
+  acc[id].push(app)
+  return acc
+}, {})
+
+const appCategories = {
+  classschedule: '课表表',
+  multi_function: '多功能类',
+  dashboard: '看板类',
+  annotation: '批注类',
+  downloader: '下载类',
+  miscellany: '杂类'
+}
+
+type Props = {
+  title?: boolean
+  class?: string
+}
+
+const { title = true, class: className, ...props } = Astro.props
+---
+
+<apps-toc class={cn('not-prose', className)} {...props}>
+  {title && <h2 class='text-foreground font-semibold'>软件</h2>}
+  <ul class='mt-4 flex flex-col gap-y-5'>
+    {
+      Object.entries(appCategories)
+        .filter(([id]) => appsByCate[id]?.length) // 过滤空分类
+        .map(([id, title]) => (
+          <li>
+            <h3 class='text-muted-foreground text-xs tracking-widest uppercase'>{title}</h3>
+            <ul class='mt-2 flex flex-col'>
+              {(appsByCate[id] || [])
+                .sort((a, b) => a.data.order - b.data.order)
+                .map((app) => (
+                  <li class='apps-item flex relative ms-2 px-3 py-1 text-foreground/75 transition-all rounded-2xl'>
+                    <a class='flex-1 hover:text-foreground' href={`/apps/${app.id}`}>
+                      {app.data.title}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </li>
+    ))
+    }
+  </ul>
+</apps-toc>
+
+<style>
+  apps-toc .apps-item::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: -0.5rem;
+    width: 2px;
+    background-color: hsl(var(--input) / var(--un-bg-opacity));
+  }
+
+  apps-toc :global(.apps-item.apps-hl) {
+    background-color: hsl(var(--muted) / var(--un-bg-opacity));
+    font-weight: 500;
+    & a {
+      color: hsl(var(--primary) / var(--un-text-opacity));
+    }
+
+    &::before {
+      background-color: hsl(var(--primary) / var(--un-bg-opacity));
+    }
+  }
+</style>
+
+<script>
+  class AppsTOC extends HTMLElement {
+    link: string = ''
+
+    constructor() {
+      super()
+      this.link = window.location.pathname
+    }
+
+    connectedCallback() {
+      const links = this.querySelectorAll('a')
+      links.forEach((link) => {
+        if (link.getAttribute('href') === this.link) {
+          link.parentElement?.classList.add('apps-hl')
+        }
+      })
+    }
+  }
+
+  customElements.define('apps-toc', AppsTOC)
+</script>

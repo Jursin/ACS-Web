@@ -1,0 +1,31 @@
+---
+import { Button, Icon } from 'astro-pure/user'
+import { cn } from 'astro-pure/utils'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import { integ } from '@/site-config'
+
+import AppsContents from './AppsContents.astro'
+
+const meta = {
+  title: '软件',
+  description: '软件内容'
+}
+---
+
+<PageLayout {meta}>
+  <Button title='返回' href='/' style='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 text-3xl font-medium'>软件</h1>
+    </div>
+
+    <div id='content' class={cn('animate mt-8 max-w-none md:min-w-[45ch]', integ.typography.class)}>
+      <h2 class='text-xl font-medium'>目录</h2>
+      <AppsContents title={false} />
+      <h2 class='text-xl font-medium'>RSS 订阅</h2>
+      <p>
+        <a href='/apps/rss.xml' target='_blank'><Icon name='rss' /> </a>
+      </p>
+    </div>
+  </main>
+</PageLayout>

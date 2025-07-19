@@ -1,0 +1,43 @@
+---
+import PageLayout from '@/layouts/CommonPage.astro'
+import { Aside } from 'astro-pure/user'
+import { Code } from 'astro:components'
+
+const headings = [
+  { depth: 2, slug: '1', text: '贡献准则' },
+  { depth: 2, slug: '2', text: '合并更改' }
+]
+
+---
+
+<PageLayout title='贡献指南' {headings} info='/contributing'>
+  <Aside type='tip' title='提示'>
+    感谢您考虑为本文档做出贡献！<br>
+    在为本文档贡献之前，请先阅读本指南。<br>
+    本文档基于 <a href="https://github.com/withastro/astro">Astro</a> 搭建，使用 <a href="https://github.com/cworld1/astro-theme-pure">Pure</a> 主题。<br>
+    首先，你应该已经对以下内容有基本的了解：<br>
+    <ul>
+        <li><a href="/docs/markdown">Markdown</a></li>
+        <li><a href="https://docs.astro.build/zh-cn/concepts/why-astro/">Astro 基础知识</a></li>
+    </ul>
+  </Aside>
+
+  <h2 id="1">贡献准则</h2>
+    <h3>1. 图片存储规范</h3>
+  <p>插入图片时请尽量直接将源文件插入到仓库文件中，不使用额外的 CDN / 图床承载图片，以便部署时自动将图片等文件打包。插入的图片请放置在 <code>./src/content/list/[name]/images</code> 下，例如：</p>
+
+  <Code lang='bash' code={
+    `index.md
+images/
+  |- image1.png
+  |- image2.png`
+    }
+  />
+
+    <h3>2. 文档编写建议</h3>
+  <p>在编写文档时请尽量做到简单易读，必要时可以插入图片、Mermaid 图表等。</p>
+
+  <h2 id="2">合并更改</h2>
+  <p>您可以向本项目发起 <a href="https://github.com/Jursin/ACS-Web/pulls">Pull Request</a> 并简要地描述您的更改，等待审核后合并。</p>
+  <p>更改合并以后，您可以在 <a href="https://acs-next.jursin.top">在线文档</a> 中看到您的更改。</p>
+</PageLayout>

@@ -1,6 +1,5 @@
 ---
 import { type CollectionEntry } from 'astro:content'
-
 import { getBlogCollection } from 'astro-pure/server'
 import { cn } from 'astro-pure/utils'
 
@@ -17,9 +16,7 @@ const docsByCate = docsCollection.reduce((acc: { [key: string]: typeof docsColle
 }, {})
 
 const docCategories = {
-  setup: 'Setup',
-  integrations: 'Integrations',
-  advanced: 'Advanced'
+  markdown: 'Markdown',
 }
 
 type Props = {
@@ -31,7 +28,7 @@ const { title = true, class: className, ...props } = Astro.props
 ---
 
 <docs-toc class={cn('not-prose', className)} {...props}>
-  {title && <h2 class='text-foreground font-semibold'>DOCS</h2>}
+  {title && <h2 class='text-foreground font-semibold'>文档</h2>}
   <ul class='mt-4 flex flex-col gap-y-5'>
     {
       Object.entries(docCategories).map(([id, title]: [string, string]) => (
