@@ -33,7 +33,7 @@ export default defineConfig({
   // https://docs.astro.build/en/guides/deploy/
   // 1. Vercel (serverless)
   adapter: vercel(),
-  output: 'server',
+  output: 'static',
   // 2. Vercel (static)
   // adapter: vercelStatic(),
   // 3. Local (standalone)
