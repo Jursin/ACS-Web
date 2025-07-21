@@ -2,6 +2,7 @@
 
 > 使用 Astro ＆ Pure 搭建的 Awesome-Class-Softwares  新网站
 
+[![Netlify deployments](https://img.shields.io/github/deployments/Jursin/ACS-Web/production?style=flat&logo=netlify&label=netlify)](https://acs-next.jursin.top)
 [![NPM Version](https://img.shields.io/npm/v/astro-pure?logo=npm&style=flat)](https://www.npmjs.com/package/astro-pure)
 [![GitHub License](https://img.shields.io/github/license/Jursin/ACS-Web?style=flat)](https://github.com/Jursin/ACS-Web/blob/main/LICENSE)
 
