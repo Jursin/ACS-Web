@@ -3,7 +3,7 @@ import type { CardListData, Config, IntegrationUserConfig, ThemeUserConfig } fro
 export const theme: ThemeUserConfig = {
   // === Basic configuration ===
   /** Title for your website. Will be used in metadata and as browser tab title. */
-  title: 'ACS-Web',
+  title: 'Awesome Class Softwares',
   /** Will be used in index page & copyright declaration */
   author: 'Jursin',
   /** Description metadata for your website. Can be used in page metadata. */
@@ -66,7 +66,7 @@ export const theme: ThemeUserConfig = {
   },
 
   content: {
-    externalLinksContent: ' ↗',
+    externalLinksContent: '',
     /** Blog page size for pagination (optional) */
     blogPageSize: 8,
     externalLinkArrow: true, // show external link arrow
